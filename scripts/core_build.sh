@@ -9,13 +9,9 @@ pushd ${BUILD_OUTPUT_DIR}
 cmake ${CMAKE_DIR}
 
 if [[ ! ${jobs+1} ]]; then
-    if command -v nproc &> /dev/null
-    # For linux
-    then
+    if command -v nproc &>/dev/null; then # For linux
         jobs=$(nproc)
-    elif command -v sysctl &> /dev/null
-    # For macOS
-    then
+    elif command -v sysctl &>/dev/null; then # For macOS
         jobs=$(sysctl -n hw.logicalcpu)
     else
         jobs=4
